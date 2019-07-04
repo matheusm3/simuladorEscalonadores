@@ -26,6 +26,7 @@ $processos['P4']['carga_de_trabalho'][3] = 'C1';
 $processos['P4']['carga_de_trabalho'][4] = 'E1';
 $processos['P4']['carga_de_trabalho'][5] = 'C1';
 
+$contador = 1;
 $menorvalor = 0;
 $voltamenor = 0;
 // laço que busca fazer a verificação quatro vezes
@@ -75,10 +76,17 @@ for ($i = 1; $i <= 4; $i++) {
 			$voltamenor = $volta; //guarda o valor da menor volta
 		}
     }
-
-    // mostra a volta menor
-	echo $voltamenor;
-    
+	
+	foreach ($processos[$voltamenor]['carga_de_trabalho'] as $n => $j){
+		// mostra a volta menor com processos em execução
+		echo "<br/>$voltamenor => " . $processos[$voltamenor]['carga_de_trabalho'][$contador];
+		$contador += 1;
+		if (!isset($processos[$voltamenor]['carga_de_trabalho'][$contador])) {
+			$contador = 1;
+			echo "<br/>------------";
+		}
+	}
+	
     // remove o processo escolhido do array de processos
 	unset($processos[$voltamenor]);
 }
